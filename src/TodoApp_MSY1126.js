@@ -35,12 +35,13 @@ const TodoApp_MSY1126 = () => {
     }, [todos]);
     const onRemove = useCallback(id => {
         setTodos(
-            todos.filter(todo => todo.id != id)
+            todos.filter(todo => todo.id !== id)
         );
     }, [todos]);
     return (<div>
+        <hi>SY world !!!</hi>
         <TodoForm onInsert={onInsert}/>
-        <TodoList todos={todos} onToggle={onToggle}/>
+        <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove}/>
     </div>)
 };
 

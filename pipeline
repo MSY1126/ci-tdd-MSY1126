@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+    tools {
+        nodejs "nodejs16"
+        git "Default"
+    }
+    stages {
+        stage('prepare') {
+            steps {
+                echo 'prepare'
+                git branch: 'main' , url: 'https://github.com/MSY1126/ci-tdd-MSY1126.git'
+                sh "npm install"
+                sh "ls -al"
+            }
+        }
+
+        stage('test') {
+            steps {
+                echo 'test'
+                sh "npm test"
+                sh "ls -al"
+                }
+            }
+        }
+
+        stage('build') {
+            steps {
+                echo 'build'
+                dir('test-cicd-react') {
+                    
+                    sh "CI=false npm run build"
+                    sh "ls -al"
+                }
+            }
+        }
+
+        stage('deploy') {
+            steps {
+                echo 'deploy' 
+                sh "ls -al"  
+                sh "scp -r -i ~/.ssh/demo_or.pem build ubuntu@localhost:~/ci-tdd-MSY1126/"
+            }
+        }
+    }
+}
