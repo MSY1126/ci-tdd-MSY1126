@@ -29,7 +29,7 @@ const TodoApp_MSY1126 = () => {
     const onToggle = useCallback(id => {
         setTodos(
             todos.map(todo => 
-                todo.id == id ? {...todo, done: !todo.done} : todo
+                todo.id === id ? {...todo, done: !todo.done} : todo
             )
         );
     }, [todos]);
@@ -39,7 +39,7 @@ const TodoApp_MSY1126 = () => {
         );
     }, [todos]);
     return (<div>
-        <hi>SY world !!!</hi>
+        <h1>SY world !!!</h1>
         <TodoForm onInsert={onInsert}/>
         <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove}/>
     </div>)
